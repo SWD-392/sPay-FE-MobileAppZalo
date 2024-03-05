@@ -11,27 +11,12 @@ import {
 } from "zmp-ui";
 import { useRecoilValue } from "recoil";
 import { displayNameState, userState } from "../state";
-import Footter from "../components/homepage/footter";
-
-
-
+import BottomNavigationPage from "../components/homepage/bottomnavigation";
 
 const UserPage = () => {
   const { userInfo: user } = useRecoilValue(userState);
   const displayName = useRecoilValue(displayNameState);
   const navigate = useNavigate();
-  const handleHomeClick = () => {
-    // Sử dụng hàm điều hướng để chuyển đến trang "User" khi nút "Profile" được nhấn
-    navigate('/');
-  };
-  const handleProfileClick = () => {
-    // Sử dụng hàm điều hướng để chuyển đến trang "User" khi nút "Profile" được nhấn
-    navigate('/user');
-  };
-  const handleQrcodeClick = () => {
-    // Sử dụng hàm điều hướng để chuyển đến trang "User" khi nút "Profile" được nhấn
-    navigate('/qr_code');
-  };
   return (
     <Page className="page">
       <Box
@@ -74,7 +59,7 @@ const UserPage = () => {
           </List>
         </div>
       </Box>
-   <Footter/>
+      <BottomNavigationPage />
     </Page>
   );
 };

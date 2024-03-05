@@ -25,6 +25,8 @@
     "strictFunctionTypes": false,
     "pretty": true,
     "removeComments": true,
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
     "sourceMap": true,
     "resolveJsonModule": true,
     "types": ["vite/client"]
