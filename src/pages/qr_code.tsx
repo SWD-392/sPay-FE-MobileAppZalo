@@ -10,7 +10,7 @@ const QrCode: React.FunctionComponent = () => {
   const navigate = useNavigate();
   return (
     <Page className="page bg-blue-900 min-h-screen flex flex-col justify-between">
-      <Header className="sticky" showBackIcon title="Mã Thanh Toán" />
+      <Header className="sticky" showBackIcon={false} title="Mã Thanh Toán" />
       <DisplayQr />
       <FooterQr />
     </Page>

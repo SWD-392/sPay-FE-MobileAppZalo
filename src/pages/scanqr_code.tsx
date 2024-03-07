@@ -30,7 +30,11 @@ const QRScan: React.FunctionComponent = () => {
 
   return (
     <Page className="page">
-      <Header title="Quét mã thanh toán" className="sticky" />
+      <Header
+        showBackIcon={false}
+        title="Quét mã thanh toán"
+        className="sticky"
+      />
       {scanResult ? (
         <div>
           Success: <p>{scanResult}</p>
