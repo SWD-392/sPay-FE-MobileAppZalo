@@ -25,7 +25,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
       closeSnackbar();
       clearInterval(timmerId.current);
     },
-    []
+    [],
   );
 
   return (

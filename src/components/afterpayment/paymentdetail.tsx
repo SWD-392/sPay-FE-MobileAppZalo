@@ -30,7 +30,7 @@ const PaymentDetailCard = ({ date, amount, data }) => {
       closeSnackbar();
       clearInterval(timmerId.current);
     },
-    []
+    [],
   );
   return (
     <div className="mt-20">

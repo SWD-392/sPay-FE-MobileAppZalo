@@ -37,17 +37,12 @@ const BottomNavigationPage = (props) => {
           }}
         />
         <BottomNavigation.Item
-          key="home"
+          key="qrcode"
           label="Quét mã"
           icon={<Icon icon="zi-qrline" />}
-          activeIcon={<Icon icon="zi-qrline" />}
           //   onClick={handleHomeClick}
           onClick={() => {
-            navigate("/qr_code", {
-              //   replace: true,
-              //   animate: true,
-              //   direction: "backward",
-            });
+            navigate("/qr_code", {});
           }}
         />
         <BottomNavigation.Item

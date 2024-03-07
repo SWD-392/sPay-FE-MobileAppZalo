@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Input, Box, Page, useSnackbar } from "zmp-ui";
 import { useRecoilState } from "recoil";
-import { displayNameState } from "../state";
+// import { displayNameState } from "../state";
 import { useNavigate } from "react-router";
 
 const FormPage: React.FunctionComponent = () => {
-  const [displayName, setDisplayName] = useRecoilState(displayNameState);
+  // const [displayName, setDisplayName] = useRecoilState(displayNameState);
   const snackbar = useSnackbar();
   const navigate = useNavigate();
 
@@ -25,9 +25,9 @@ const FormPage: React.FunctionComponent = () => {
           <Input
             label="Display Name"
             type="text"
-            placeholder={displayName}
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
+            // placeholder={displayName}
+            // value={displayName}
+            // onChange={(e) => setDisplayName(e.target.value)}
           />
           <Box mt={4}>
             <Button fullWidth variant="secondary" onClick={handleSubmit}>

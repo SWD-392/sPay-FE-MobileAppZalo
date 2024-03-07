@@ -10,12 +10,13 @@ import {
   useNavigate,
 } from "zmp-ui";
 import { useRecoilValue } from "recoil";
-import { displayNameState, userState } from "../state";
+// import { displayNameState, userState } from "../state";
 import BottomNavigationPage from "../components/homepage/bottomnavigation";
+import { userState } from "../state";
 
 const UserPage = () => {
-  const { userInfo: user } = useRecoilValue(userState);
-  const displayName = useRecoilValue(displayNameState);
+  const user = useRecoilValue(userState);
+  // const displayName = useRecoilValue(displayNameState);
   const navigate = useNavigate();
   return (
     <Page className="page">
@@ -37,7 +38,13 @@ const UserPage = () => {
         </Box>
         <Box flex flexDirection="row" alignItems="center" ml={8}>
           <Box>
-            <Text.Title>{displayName || user.name}</Text.Title>
+            <Text.Title>
+              {
+                // displayName
+                //  ||
+                user.name
+              }
+            </Text.Title>
           </Box>
           <Box ml={4}>
             <Button
@@ -54,12 +61,15 @@ const UserPage = () => {
         <div className="section-container">
           <List>
             <List.Item title="Name" subTitle={user.name} />
-            <List.Item title="Display Name" subTitle={displayName} />
+            <List.Item
+              title="Display Name"
+
+              // subTitle={displayName}
+            />
             <List.Item title="ID" subTitle={user.id} />
           </List>
         </div>
       </Box>
-      <BottomNavigationPage />
     </Page>
   );
 };

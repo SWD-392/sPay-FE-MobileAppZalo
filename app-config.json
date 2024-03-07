@@ -1,17 +1,15 @@
 {
   "app": {
     "title": "S Pay App",
-    "headerTitle": "S Pay App",
-    "headerColor": "#1843EF",
-    "textColor": "white",
-    "textAlign": "left",
-    "statusBarColor": "#1843EF",
+    "headerColor": "",
+    "textColor": "black",
+    "statusBarColor": "#ffffff",
     "leftButton": "none",
-    "statusBar": "normal",
-    "actionBarHidden": true,
+    "statusBar": "transparent",
+    "selfControlLoading": false,
     "hideAndroidBottomNavigationBar": false,
-    "hideIOSSafeAreaBottom": true,
-    "selfControlLoading": false
+    "hideIOSSafeAreaBottom": false,
+    "actionBarHidden": true
   },
   "debug": false,
   "pages": [],
