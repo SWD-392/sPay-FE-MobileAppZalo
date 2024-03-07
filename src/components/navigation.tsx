@@ -22,7 +22,8 @@ export type TabKeys = keyof typeof tabs;
 
 export const NO_BOTTOM_NAVIGATION_PAGES = [
   // "/qr_code",
-  "/qrcodescanner",
+  // "/qrcodescanner",
+  "/aaa",
 ];
 
 export const Navigation = () => {

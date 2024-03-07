@@ -19,7 +19,7 @@ const FooterQr = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white flex justify-center p-8">
+    <div className="fixed bottom-10 left-0 right-0 bg-white flex justify-center p-8">
       <button
         className={`py-3 px-6 rounded ${
           button.isShowQRClick ? "bg-green-500" : "bg-gray-500"

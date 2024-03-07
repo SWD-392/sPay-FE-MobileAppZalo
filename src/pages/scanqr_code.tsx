@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Page, useNavigate, Header } from "zmp-ui";
-import { useRecoilValue } from "recoil";
-import { userState } from "../state";
 import FooterQr from "../components/qr-code/footer_qr";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
 const QRScan: React.FunctionComponent = () => {
-  const user = useRecoilValue(userState);
-  const navigate = useNavigate();
+  const [scanResult, setScanResult] = React.useState<string>("");
+
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner(
+      "qr-reader",
+      { fps: 10, qrbox: 250 },
+      /* verbose= */ false
+    );
+
+    scanner.render(success, error);
+
+    function success(result: string) {
+      scanner.clear();
+      setScanResult(result);
+      console.log(result);
+    }
+    function error(err: string) {
+      console.warn(err);
+    }
+    return () => {
+      scanner.clear();
+    };
+  }, []);
+
   return (
-    <Page className="page bg-blue-900 min-h-screen flex flex-col justify-between">
-      <Header title="Quét mã thanh toán" />
-      <div>scanQR</div>
+    <Page className="page">
+      <Header title="Quét mã thanh toán" className="sticky" />
+      {scanResult ? (
+        <div>
+          Success: <p>{scanResult}</p>
+        </div>
+      ) : (
+        <div className=" h-full text-center">
+          <div id="qr-reader" className="mt-48"></div>
+        </div>
+      )}
+
       <FooterQr />
     </Page>
   );
