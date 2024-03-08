@@ -10,29 +10,31 @@ export const Welcome: FC = () => {
   const user = useRecoilValueLoadable(userState);
 
   return (
-    <Header
-      className="app-header sticky no-border pl-4 flex-none pb-[6px]"
-      showBackIcon={false}
-      title={
-        (
-          <Box flex alignItems="center" className="space-x-2">
-            <img
-              className="w-8 h-8 rounded-lg border-inset"
-              src={getConfig((c) => c.template.headerLogo) || logo}
-            />
-            <Box>
-              <Text.Title size="small">{appConfig.app.title}</Text.Title>
-              {user.state === "hasValue" ? (
-                <Text size="xxSmall" className="text-gray">
-                  Welcome, {user.contents.name}!
-                </Text>
-              ) : (
-                <Text>...</Text>
-              )}
+    <Box className="sticky">
+      <Header
+        className="app-header sticky no-border pl-4 flex-none pb-[6px]"
+        showBackIcon={false}
+        title={
+          (
+            <Box flex alignItems="center" className="space-x-2">
+              <img
+                className="w-8 h-8 rounded-lg border-inset"
+                src={getConfig((c) => c.template.headerLogo) || logo}
+              />
+              <Box>
+                <Text.Title size="small">{appConfig.app.title}</Text.Title>
+                {user.state === "hasValue" ? (
+                  <Text size="xxSmall" className="text-gray">
+                    Welcome, {user.contents.name}!
+                  </Text>
+                ) : (
+                  <Text>...</Text>
+                )}
+              </Box>
             </Box>
-          </Box>
-        ) as unknown as string
-      }
-    />
+          ) as unknown as string
+        }
+      />
+    </Box>
   );
 };

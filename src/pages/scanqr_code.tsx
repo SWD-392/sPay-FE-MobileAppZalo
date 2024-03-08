@@ -5,7 +5,7 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 
 const QRScan: React.FunctionComponent = () => {
   const [scanResult, setScanResult] = React.useState<string>("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     const scanner = new Html5QrcodeScanner(
       "qr-reader",
@@ -28,6 +28,14 @@ const QRScan: React.FunctionComponent = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (scanResult) {
+      console.log(scanResult);
+
+      navigate("/payment-detail", { state: { result: scanResult } });
+    }
+  }, [scanResult]);
+
   return (
     <Page className="page">
       <Header
@@ -41,7 +49,7 @@ const QRScan: React.FunctionComponent = () => {
         </div>
       ) : (
         <div className=" h-full text-center">
-          <div id="qr-reader" className="mt-48"></div>
+          <div id="qr-reader" className="text-center mt-48"></div>
         </div>
       )}
 

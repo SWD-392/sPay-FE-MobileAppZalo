@@ -25,41 +25,45 @@ const Card: React.FC<CardProps> = ({ data }) => {
       closeSnackbar();
       clearInterval(timmerId.current);
     },
-    [],
+    []
   );
 
   return (
     <div className="flex items-center justify-center">
-      <a
-        href="#"
-        className="block max-w-sm w-96 p-6 mt-5 bg-white border border-gray-200 rounded-lg "
-      >
-        <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {data.packageName}
-        </h5>
-        <p>Số tiền còn lại: {data.price}đ</p>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          Loại sản phẩm :{data.cardCategory}
-        </p>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          Ngày hết hạn: {data.expireIn} ngày
-        </p>
+      <div className="block max-w-sm w-96 p-6 mt-5 bg-white border border-gray-200 rounded-lg ">
+        <div className="flex items-center justify-center">
+          <div>
+            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {data.packageName}
+            </h5>
+            <p>Số tiền còn lại: {data.price}đ</p>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              Loại sản phẩm :{data.cardCategory}
+            </p>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              Ngày hết hạn: {data.expireIn} ngày
+            </p>
+          </div>
 
-        <Button
-          className="mt-5 mb-5 ml-8"
-          variant="secondary"
-          type="highlight"
-          onClick={() => {
-            openSnackbar({
-              text: "Chọn gói thành công!",
-              type: "success",
-            });
-            navigate("/payment-detail");
-          }}
-        >
-          Chọn gói
-        </Button>
-      </a>
+          <div className="m-auto">
+            <Button
+              className="mt-5 mb-5 ml-8"
+              variant="secondary"
+              type="highlight"
+              size="small"
+              onClick={() => {
+                openSnackbar({
+                  text: "Chọn gói thành công!",
+                  type: "success",
+                });
+                navigate("/payment-detail");
+              }}
+            >
+              Chọn mua
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

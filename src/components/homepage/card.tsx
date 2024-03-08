@@ -21,10 +21,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
 
   return (
     <div className="flex items-center justify-between">
-      <a
-        href="#"
-        className="block max-w-sm w-96 p-6 mt-5 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-      >
+      <div className="block max-w-sm w-96 p-6 mt-5 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {data.packageName}
         </h5>
@@ -45,7 +42,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         >
           Mua ngay
         </Button>
-      </a>
+      </div>
     </div>
   );
 };

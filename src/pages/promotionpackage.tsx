@@ -4,9 +4,8 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../state";
 import Card from "../components/homepage/card";
 import BottomNavigationPage from "../components/homepage/bottomnavigation";
-import { Welcome } from "../components/homepage/welcome";
 
-const HomePage: React.FunctionComponent = () => {
+const PromotionPackage: React.FunctionComponent = () => {
   const user = useRecoilValue(userState);
 
   const packages = [
@@ -62,11 +61,9 @@ const HomePage: React.FunctionComponent = () => {
 
   return (
     <Page hideScrollbar className="bg-white">
-      <Welcome />
       <div className="mt-20 mx-4">
-        <h1 className="mt-10 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Các gói khuyến mãi
-        </h1>
+        <Header title="Các gói khuyến mãi" />
+
         {packages.map((packageItem) => (
           <Card key={packageItem.packageID} data={packageItem} />
         ))}
@@ -75,4 +72,4 @@ const HomePage: React.FunctionComponent = () => {
   );
 };
 
-export default HomePage;
+export default PromotionPackage;

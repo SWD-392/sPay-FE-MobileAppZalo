@@ -8,7 +8,7 @@ import User from "../pages/user";
 import QrCode from "../pages/qr_code";
 import BottomNavigationPage from "./homepage/bottomnavigation";
 import PaymentPage from "../pages/pay";
-import PaymentPageDetail from "../pages/afterpay";
+import PaymentPageDetail from "../pages/payment";
 import QRScan from "../pages/scanqr_code";
 import Paypackage from "../pages/paypackage";
 import { Navigation } from "./navigation";
