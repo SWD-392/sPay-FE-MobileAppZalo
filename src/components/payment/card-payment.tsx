@@ -31,7 +31,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
   return (
     <div className="flex items-center justify-center">
       <div className="block max-w-sm w-96 p-6 mt-5 bg-white border border-gray-200 rounded-lg ">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center">
           <div>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               {data.packageName}
@@ -44,22 +44,21 @@ const Card: React.FC<CardProps> = ({ data }) => {
               Ngày hết hạn: {data.expireIn} ngày
             </p>
           </div>
-
           <div className="m-auto">
             <Button
               className="mt-5 mb-5 ml-8"
               variant="secondary"
-              type="highlight"
               size="small"
+              type="highlight"
               onClick={() => {
                 openSnackbar({
                   text: "Chọn gói thành công!",
                   type: "success",
                 });
-                navigate("/payment-detail");
+                navigate("/pay-package");
               }}
             >
-              Chọn mua
+              Chọn gói
             </Button>
           </div>
         </div>
