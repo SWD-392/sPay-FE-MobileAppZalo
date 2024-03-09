@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const DisplayQr = () => {
   const [qrValue, setQrValue] = useState(
-    "https://spayapp.azurewebsites.net/index.html"
+    "ST_2216054E-65AB-4D22-B04F-522849296E0D"
   );
   const [countdown, setCountdown] = useState(60);
 
@@ -13,7 +13,8 @@ const DisplayQr = () => {
     const qrInterval = setInterval(() => {
       // Update the QR code value here
       setQrValue(
-        "https://spayapp.azurewebsites.net/index.html?time=" + Date.now()
+        // "https://spayapp.azurewebsites.net/index.html?time="
+        qrValue + "?time=" + Date.now()
       );
       // Reset the countdown
       setCountdown(60);
