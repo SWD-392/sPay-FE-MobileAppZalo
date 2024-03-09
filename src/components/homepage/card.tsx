@@ -3,13 +3,19 @@ import { Button, useNavigate } from "zmp-ui";
 // Import your SVG or PNG logo here
 
 interface PackageData {
-  packageID: number;
-  packageName: string;
-  packageDescription: string;
-  cardCategory: string;
+  no: number;
+  cardKey: string;
+  cardTypeKey: string;
+  cardTypeName: string;
+  cardName: string;
+  number: string;
+  description: string | null;
+  moneyValue: number;
+  discountPercentage: number;
   price: number;
-  expireIn: number;
-  totalReceive: number;
+  insDate: string;
+  dateNumber: number;
+  status: number;
 }
 
 interface CardProps {
@@ -24,11 +30,11 @@ const Card: React.FC<CardProps> = ({ data }) => {
       <div className="block max-w-sm w-96 p-6 mt-5 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <div>
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {data.packageName}
+            {data.cardName}
           </h5>
           <div className="flex justify-between">
             <p className="w-60">Mô tả:</p>
-            <p className="text-right">{data.packageDescription}</p>
+            <p className="text-right">{data.description}</p>
           </div>
           <div className="flex justify-between">
             <p className="w-32">Giá gói:</p>
@@ -36,15 +42,19 @@ const Card: React.FC<CardProps> = ({ data }) => {
           </div>
           <div className="flex justify-between">
             <p>Số tiền nhận được: </p>
-            <p>{data.price}đ</p>
+            <p>{data.moneyValue}đ</p>
           </div>
           <div className="flex justify-between">
+            <p>Khuyễn mãi: </p>
+            <p>{data.discountPercentage}đ</p>
+          </div>
+          {/* <div className="flex justify-between">
             <p className="w-32">Loại sản phẩm:</p>
             <p>{data.cardCategory}</p>
-          </div>
+          </div> */}
           <div className="flex justify-between">
             <p className="w-32">Ngày hết hạn:</p>
-            <p>{data.expireIn} ngày</p>
+            <p>{data.dateNumber} ngày</p>
           </div>
         </div>
 

@@ -38,10 +38,7 @@ export const Layout: FC = () => {
       <Box className="flex-1 flex flex-col overflow-hidden">
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route
-            path="/promotion-package"
-            element={<PromotionPackage />}
-          ></Route>
+
           <Route path="/user-package" element={<UserPackage />}></Route>
 
           <Route path="/qr_code" element={<QrCode />}></Route>
@@ -51,6 +48,10 @@ export const Layout: FC = () => {
           <Route path="/payment" element={<PaymentPage />}></Route>
           <Route path="/payment-detail" element={<PaymentPageDetail />}></Route>
           <Route path="/pay-package" element={<Paypackage />}></Route>
+          <Route
+            path="/promotion-package"
+            element={<PromotionPackage />}
+          ></Route>
         </Routes>
       </Box>
       <Navigation />

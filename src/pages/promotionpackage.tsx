@@ -16,9 +16,10 @@ const PromotionPackage: React.FunctionComponent = () => {
       <div className="mt-20 mx-4 mb-20">
         <Header title="Các gói khuyến mãi" />
 
-        {packages.map((packageItem) => (
-          <Card key={packageItem.packageID} data={packageItem} />
-        ))}
+        {packages &&
+          packages.items.map((packageItem) => (
+            <Card key={packageItem.packageID} data={packageItem} />
+          ))}
       </div>
     </Page>
   );

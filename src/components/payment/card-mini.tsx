@@ -3,11 +3,19 @@ import { Box, Button, useNavigate, useSnackbar } from "zmp-ui";
 // Import your SVG or PNG logo here
 
 interface PackageData {
-  packageID: number;
-  packageName: string;
+  no: number;
+  cardKey: string;
+  cardTypeKey: string;
+  cardTypeName: string;
+  cardName: string;
+  number: string;
+  description: string | null;
+  moneyValue: number;
+  discountPercentage: number;
   price: number;
-  cardCategory: string;
-  expireIn: number;
+  insDate: string;
+  dateNumber: number;
+  status: number;
 }
 
 interface CardProps {
@@ -34,14 +42,16 @@ const CardMini: React.FC<CardProps> = ({ data }) => {
         <div className="flex items-center">
           <div>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {data.packageName}
+              {data.cardName}
             </h5>
-            <p>Số tiền còn lại: {data.price}đ</p>
+            <p>Thanh toán: {data.price}đ</p>
+            <p>Thực nhận: {data.moneyValue}đ</p>
+            <p>Giảm giá: {data.discountPercentage}%</p>
             <p className="font-normal text-gray-700 dark:text-gray-400">
-              Loại sản phẩm :{data.cardCategory}
+              {/* Loại sản phẩm :{data.cardCategory} */}
             </p>
             <p className="font-normal text-gray-700 dark:text-gray-400">
-              Ngày hết hạn: {data.expireIn} ngày
+              Ngày hết hạn: {data.dateNumber} ngày
             </p>
           </div>
           <div className="m-auto">
