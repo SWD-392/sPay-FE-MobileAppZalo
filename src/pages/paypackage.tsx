@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 const Paypackage = () => {
   const location = useLocation();
-  const data = location.state;
+  const data = location.state.packages;
   return (
     <Page className="flex bg-white flex-col">
       <Header showBackIcon title="Thanh toán gói" />

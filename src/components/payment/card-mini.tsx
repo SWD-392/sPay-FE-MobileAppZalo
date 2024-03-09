@@ -14,7 +14,7 @@ interface CardProps {
   data: PackageData;
 }
 
-const Card: React.FC<CardProps> = ({ data }) => {
+const CardMini: React.FC<CardProps> = ({ data }) => {
   const navigate = useNavigate();
 
   const { openSnackbar, setDownloadProgress, closeSnackbar } = useSnackbar();
@@ -55,7 +55,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
                   text: "Chọn gói thành công!",
                   type: "success",
                 });
-                navigate("/pay-package");
+                navigate("/pay-package", { state: { packages: data } });
               }}
             >
               Chọn gói
@@ -67,4 +67,4 @@ const Card: React.FC<CardProps> = ({ data }) => {
   );
 };
 
-export default Card;
+export default CardMini;

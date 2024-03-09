@@ -6,37 +6,35 @@ interface PackageCardPayDetailProps {
   data: any;
 }
 
-const PackageCardPayDetail: React.FC<PackageCardPayDetailProps> = ({}) => {
-  const location = useLocation();
-  let data = location.state?.data;
-
-  if (!data) {
-    const storedData = sessionStorage.getItem("data");
-    if (storedData) {
-      data = JSON.parse(storedData);
-    }
-  }
-
+const PackageCardPayDetail: React.FC<PackageCardPayDetailProps> = ({
+  data,
+}) => {
   return (
     <div className="mt-64 ">
       <div className="flex justify-center">
         <div className="w-3/4 bg-white rounded-lg p-5 shadow-lg">
-          <div className="text-2xl font-bold text-center">Gói cơ bản</div>
-          <div className="text-center text-gray-500 mt-3">
-            {data.packageDescription}
+          <div className="text-2xl font-bold text-center">
+            {data.packageName}
           </div>
-          <div className="text-center text-gray-500 mt-3">
-            Số tiền phải thanh toán: {data.price}đ
+          <div className="flex justify-between mt-4">
+            <p className="w-60">Mô tả:</p>
+            <p className="text-right">{data.packageDescription}</p>
           </div>
-          <div className="text-center text-gray-500 mt-3">
-            Số tiền nhận được: {data.totalReceive}đ
+          <div className="flex justify-between mt-4">
+            <p className="w-32">Thanh toán:</p>
+            <p className="text-right">{data.price}đ</p>
           </div>
-          <div className="text-center text-gray-500 mt-3">
-            Hạn sử dụng: {data.expireIn} ngày
+          <div className="flex justify-between mt-4">
+            <p className="w-32">Tổng tiền dùng:</p>
+            <p className="text-right">{data.totalReceive}đ</p>
           </div>
-
-          <div className="text-center text-gray-500 mt-3">
-            Loại sản phẩm: {data.cardCategory}
+          <div className="flex justify-between mt-4">
+            <p className="w-32">Hạn sử dụng:</p>
+            <p className="text-right">{data.expireIn} ngày</p>
+          </div>
+          <div className="flex justify-between mt-4">
+            <p className="w-32">Loại sản phẩm:</p>
+            <p className="text-right">{data.cardCategory}</p>
           </div>
         </div>
       </div>

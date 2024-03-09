@@ -1,4 +1,4 @@
-import Card from "../components/payment/card-payment";
+import Card from "../components/payment/card-mini";
 import PaymentDetail from "../components/payment/paydetail";
 import React from "react";
 import { Header, Page } from "zmp-ui";

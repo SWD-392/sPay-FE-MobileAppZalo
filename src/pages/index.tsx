@@ -1,8 +1,9 @@
 import React from "react";
 import { Welcome } from "../components/homepage/welcome";
 import { Button, Page, Swiper, useNavigate } from "zmp-ui";
-import Card from "../components/payment/card-payment";
+import Card from "../components/payment/card-mini";
 import UserCard from "../components/usercard/user-card";
+import CardMini from "../components/payment/card-mini";
 
 const HomePage: React.FunctionComponent = () => {
   const packages = [
@@ -91,7 +92,7 @@ const HomePage: React.FunctionComponent = () => {
           <Button
             variant="tertiary"
             onClick={() => {
-              navigate("/promotion-package");
+              navigate("/promotion-package", { state: { packages: packages } });
             }}
           >
             Xem tất cả
@@ -101,7 +102,7 @@ const HomePage: React.FunctionComponent = () => {
         <Swiper>
           {packages.map((packageItem) => (
             <Swiper.Slide>
-              <Card key={packageItem.packageID} data={packageItem} />
+              <CardMini key={packageItem.packageID} data={packageItem} />
             </Swiper.Slide>
           ))}
         </Swiper>
