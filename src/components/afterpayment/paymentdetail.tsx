@@ -60,27 +60,21 @@ const PaymentDetailCard: React.FC<CardProps> = ({
 
           {/* lấy dữ liệu từ api */}
           <div className="mt-2">
-            <div>Tên cửa hàng:</div>
+            <div>Tên cửa hàng: </div>
             <Input
               placeholder="Thông tin cửa hàng"
               disabled
-              value={data ? data.storeName : ""}
+              value={
+                data ? data.storeName + " (" + data.storeCategory + ")" : ""
+              }
             />
           </div>
           <div className="mt-2">
-            <div>Chủ cửa hàng:</div>
+            <div>Chủ cửa hàng: </div>
             <Input
               placeholder="Chủ cửa hàng"
               disabled
               value={data ? data.ownerName : ""}
-            />
-          </div>
-          <div className="mt-2">
-            <div>Loại sản phẩm:</div>
-            <Input
-              placeholder="Loại sản phẩm"
-              disabled
-              value={data ? data.storeCategory : ""}
             />
           </div>
 

@@ -20,9 +20,9 @@ const UserPage = () => {
   // const displayName = useRecoilValue(displayNameState);
   const navigate = useNavigate();
   return (
-    <Page className="page">
+    <Page className="page bg-white ">
       <Header showBackIcon={false} title="Thông tin cá nhân" />
-      <div className="mt-20">
+      <div className="mt-20 shadow-lg border rounded-lg">
         <Box
           flex
           flexDirection="column"
@@ -64,13 +64,13 @@ const UserPage = () => {
         <Box m={0} p={0} mt={4}>
           <div className="section-container">
             <List>
-              <List.Item title="Name" subTitle={user.name} />
-              <List.Item
+              <List.Item title="Tên người dùng" subTitle={user.name} />
+              {/* <List.Item
                 title="Display Name"
 
                 // subTitle={displayName}
-              />
-              <List.Item title="ID" subTitle={user.id} />
+              /> */}
+              {/* <List.Item title="ID" subTitle={user.id} /> */}
             </List>
           </div>
         </Box>
