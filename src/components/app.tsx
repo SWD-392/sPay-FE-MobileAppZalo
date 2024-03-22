@@ -13,6 +13,7 @@ import QRScan from "../pages/scanqr_code";
 import Paypackage from "../pages/paypackage";
 import { Navigation } from "./navigation";
 import { Layout } from "./layout";
+import { AuthProvider } from "../hook/AuthContext";
 
 const MyApp = () => {
   return (
@@ -21,7 +22,9 @@ const MyApp = () => {
         <SnackbarProvider>
           <Box className="flex-1 flex flex-col overflow-hidden">
             <ZMPRouter>
-              <Layout />
+              <AuthProvider>
+                <Layout />
+              </AuthProvider>
             </ZMPRouter>
           </Box>
         </SnackbarProvider>

@@ -7,15 +7,16 @@ interface PackageData {
   cardKey: string;
   cardTypeKey: string;
   cardTypeName: string;
+  cardNo: string;
   cardName: string;
-  number: string;
-  description: string | null;
-  moneyValue: number;
+  description: string;
+  promotionPackageKey: string;
+  packageName: string;
+  usaebleAmount: number;
   discountPercentage: number;
   price: number;
-  insDate: string;
-  dateNumber: number;
-  status: number;
+  numberDate: number;
+  withdrawAllowed: boolean;
 }
 
 interface CardProps {
@@ -42,16 +43,19 @@ const CardMini: React.FC<CardProps> = ({ data }) => {
         <div className="flex items-center">
           <div>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {data.cardName}
+              {data.cardName.length > 20
+                ? `${data.cardName.substring(0, 20)}...`
+                : data.cardName}
             </h5>
             <p>Thanh toán: {data.price}đ</p>
-            <p>Thực nhận: {data.moneyValue}đ</p>
+            <p>Giá trị được dùng: {data.price}đ</p>
             <p>Giảm giá: {data.discountPercentage}%</p>
+
+            {/* <p className="font-normal text-gray-700 dark:text-gray-400">
+              Áp dụng cho :{data.}
+            </p> */}
             <p className="font-normal text-gray-700 dark:text-gray-400">
-              {/* Loại sản phẩm :{data.cardCategory} */}
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              Ngày hết hạn: {data.dateNumber} ngày
+              Dùng trong: {data.numberDate} ngày
             </p>
           </div>
           <div className="m-auto">

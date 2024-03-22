@@ -14,15 +14,22 @@ import { useRecoilValue } from "recoil";
 // import { displayNameState, userState } from "../state";
 import BottomNavigationPage from "../components/homepage/bottomnavigation";
 import { userState } from "../state";
+import { useAuth } from "../hook/AuthContext";
 
 const UserPage = () => {
   const user = useRecoilValue(userState);
   // const displayName = useRecoilValue(displayNameState);
   const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    logout();
+  };
+
   return (
-    <Page className="page bg-white ">
+    <Page className="page bg-white pb-2 ">
       <Header showBackIcon={false} title="Thông tin cá nhân" />
-      <div className="mt-20 shadow-lg border rounded-lg">
+      <div className="mt-20 shadow-lg border rounded-lg pb-3">
         <Box
           flex
           flexDirection="column"
@@ -65,14 +72,21 @@ const UserPage = () => {
           <div className="section-container">
             <List>
               <List.Item title="Tên người dùng" subTitle={user.name} />
-              {/* <List.Item
-                title="Display Name"
 
-                // subTitle={displayName}
-              /> */}
-              {/* <List.Item title="ID" subTitle={user.id} /> */}
+              <List.Item title="ID" subTitle={user.id} />
             </List>
           </div>
+        </Box>
+        <Box flex alignItems="center" justifyContent="center">
+          <Button
+            onClick={() => {
+              handleLogout();
+            }}
+            className="myButton"
+            size="large"
+          >
+            Đăng xuất
+          </Button>
         </Box>
       </div>
     </Page>

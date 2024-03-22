@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Welcome } from "../components/homepage/welcome";
 import { Button, Page, Swiper, useNavigate } from "zmp-ui";
 import Card from "../components/payment/card-mini";
 import UserCard from "../components/usercard/user-card";
 import CardMini from "../components/payment/card-mini";
 import { getPromotion } from "../service/pay-package";
+import { getMembershipByUserKey } from "../service/";
+import { useAuth } from "../hook/AuthContext";
 
 const HomePage: React.FunctionComponent = () => {
   type PackageData = {
@@ -17,102 +19,72 @@ const HomePage: React.FunctionComponent = () => {
       cardKey: string;
       cardTypeKey: string;
       cardTypeName: string;
+      cardNo: string;
       cardName: string;
-      number: string;
-      description: string | null;
-      moneyValue: number;
+      description: string;
+      promotionPackageKey: string;
+      packageName: string;
+      usaebleAmount: number;
       discountPercentage: number;
       price: number;
-      insDate: string;
-      dateNumber: number;
-      status: number;
+      numberDate: number;
+      withdrawAllowed: boolean;
     }[];
   };
 
+  type MembershipData = {
+    no: number;
+    membershipKey: string;
+    userKey: string;
+    cardName: string;
+    cardTypeName: string;
+    cardDescription: string;
+    storeCateName: string;
+    usaebleAmount: number;
+    balance: number;
+    withdrawAllowed: boolean;
+    expiredDate: string;
+    isDefaultMembership: boolean;
+  };
+
+  type ResponseData = {
+    pageSize: number;
+    pageIndex: number;
+    totalCount: number;
+    totalPages: number;
+    items: MembershipData[];
+  };
+  type ApiResponse = {
+    data: ResponseData;
+  };
   const [packages, setPackages] = useState<PackageData | null>(null);
+  const [promotionData, setPromotionData] = useState<ResponseData | null>(null);
+  const userKey = localStorage.getItem("user");
+
+  const token = localStorage.getItem("token");
+
+  console.log(token);
 
   useEffect(() => {
-    getPromotion().then((data) => {
+    const fetchPromotion = async () => {
+      const data = await getPromotion();
       if (data) {
         setPackages(data.data);
       }
-    });
+    };
+
+    fetchPromotion();
   }, []);
 
-  console.log(packages);
-
-  // const packages = [
-  //   {
-  //     packageID: 1,
-  //     packageName: "Gói cơ bản",
-  //     packageDescription:
-  //       "Gói cơ bản cho phép thanh toán nhanh chóng tại các nhà hàng ưa thích.",
-  //     price: 100000,
-  //     cardCategory: "Đồ ăn",
-  //     expireIn: 2,
-  //     totalReceive: 110000,
-  //   },
-  //   {
-  //     packageID: 2,
-  //     packageName: "Gói ăn uống",
-  //     packageDescription:
-  //       "Gói ăn uống cho phép thanh toán nhanh chóng các món ăn tại các quầy ăn uống ưa thích.",
-  //     price: 100000,
-  //     cardCategory: "Mua sắm",
-  //     expireIn: 1,
-  //     totalReceive: 110000,
-  //   },
-  //   {
-  //     packageID: 3,
-  //     packageName: "Gói mua sắm",
-  //     packageDescription: "This is package 3",
-  //     cardCategory: "Phụ kiện",
-  //     price: 300000,
-  //     expireIn: 3,
-  //     totalReceive: 330000,
-  //   },
-  //   {
-  //     packageID: 4,
-  //     packageName: "Gói siêu vip",
-  //     packageDescription: "This is package 4",
-  //     price: 500000,
-  //     cardCategory: "Phụ kiện",
-  //     expireIn: 5,
-  //     totalReceive: 550000,
-  //   },
-  //   {
-  //     packageID: 5,
-  //     packageName: "Gói siêu siêu vip",
-  //     packageDescription: "This is package 5",
-  //     price: 1000000,
-  //     cardCategory: "Đồ ăn",
-
-  //     expireIn: 10,
-  //     totalReceive: 550000,
-  //   },
-  // ];
-
-  const promotionData = [
-    {
-      id: 1,
-      packageName: "Gói cơ bản ",
-      totalMoney: 100000,
-      cateShop: "Ăn uống",
-    },
-    {
-      id: 2,
-      packageName: "Package 2",
-      totalMoney: 200,
-      cateShop: "Category 2",
-    },
-    {
-      id: 3,
-
-      packageName: "Package 3",
-      totalMoney: 300,
-      cateShop: "Category 3",
-    },
-  ];
+  useEffect(() => {
+    if (userKey) {
+      getMembershipByUserKey(userKey).then((data) => {
+        if (data) {
+          setPromotionData(data.data);
+        }
+      });
+    }
+  }, [userKey]);
 
   const navigate = useNavigate();
   return (
@@ -127,21 +99,24 @@ const HomePage: React.FunctionComponent = () => {
           <Button
             variant="tertiary"
             onClick={() => {
-              navigate("/promotion-package", { state: { packages: packages } });
+              navigate("/promotion-package", {
+                state: { packages: packages && packages.items },
+              });
             }}
           >
             Xem tất cả
           </Button>
         </div>
-
-        <Swiper>
-          {packages &&
-            packages.items.map((packageItem) => (
-              <Swiper.Slide>
-                <CardMini key={packageItem.cardKey} data={packageItem} />
-              </Swiper.Slide>
-            ))}
-        </Swiper>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Swiper>
+            {packages &&
+              packages.items.map((packageItem) => (
+                <Swiper.Slide>
+                  <CardMini key={packageItem.cardKey} data={packageItem} />
+                </Swiper.Slide>
+              ))}
+          </Swiper>
+        </Suspense>
       </div>
 
       <div className="mt-5">
@@ -153,24 +128,27 @@ const HomePage: React.FunctionComponent = () => {
             variant="tertiary"
             onClick={() => {
               navigate("/user-package", {
-                state: { userPromotion: promotionData },
+                state: { userPromotion: promotionData && promotionData.items },
               });
             }}
           >
             Xem tất cả
           </Button>
         </div>
-        <Swiper>
-          {promotionData.map((promotiondata) => (
-            <Swiper.Slide>
-              {/* <Card key={packageItem.packageID} data={packageItem} /> */}
-              <UserCard
-                key={promotiondata.id}
-                promotionCardData={promotiondata}
-              />
-            </Swiper.Slide>
-          ))}
-        </Swiper>
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <Swiper>
+            {promotionData &&
+              promotionData.items.map((promotiondata) => (
+                <Swiper.Slide>
+                  <UserCard
+                    key={promotiondata.membershipKey}
+                    promotionCardData={promotiondata}
+                  />
+                </Swiper.Slide>
+              ))}
+          </Swiper>
+        </Suspense>
       </div>
     </Page>
   );

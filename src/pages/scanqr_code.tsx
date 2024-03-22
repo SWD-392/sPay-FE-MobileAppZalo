@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Page, useNavigate, Header } from "zmp-ui";
 import FooterQr from "../components/qr-code/footer_qr";
 import { Html5QrcodeScanner } from "html5-qrcode";
+import { getStore } from "../service";
 
 const QRScan: React.FunctionComponent = () => {
   const [scanResult, setScanResult] = React.useState<string>("");
+  const [store, setStore] = useState<any>(null);
+
   const navigate = useNavigate();
   useEffect(() => {
     const scanner = new Html5QrcodeScanner(
@@ -18,7 +21,6 @@ const QRScan: React.FunctionComponent = () => {
     function success(result: string) {
       scanner.clear();
       setScanResult(result);
-      console.log(result);
     }
     function error(err: string) {
       console.warn(err);
@@ -29,11 +31,17 @@ const QRScan: React.FunctionComponent = () => {
   }, []);
 
   useEffect(() => {
-    if (scanResult) {
-      console.log(scanResult);
+    const fetchStore = async () => {
+      if (scanResult) {
+        const result = await getStore(scanResult);
+        console.log("data", result.data);
+        if (result.data) {
+          navigate("/payment-detail", { state: { result: result.data } });
+        }
+      }
+    };
 
-      navigate("/payment-detail", { state: { result: scanResult } });
-    }
+    fetchStore();
   }, [scanResult]);
 
   return (

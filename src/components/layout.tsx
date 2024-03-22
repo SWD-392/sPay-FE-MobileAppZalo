@@ -17,6 +17,10 @@ import Paypackage from "../pages/paypackage";
 import Home from "../pages";
 import PromotionPackage from "../pages/promotionpackage";
 import UserPackage from "../pages/user_promotion_package";
+import PrivateRoute from "../route/PrivateRoute";
+import LoginPage from "../pages/login";
+import { useAuth } from "../hook/AuthContext";
+import { Navigate } from "react-router-dom";
 
 if (getSystemInfo().platform === "android") {
   const androidSafeTop = Math.round(
@@ -28,7 +32,13 @@ if (getSystemInfo().platform === "android") {
     `${androidSafeTop}px`
   );
 }
+const ProtectedComponent: React.FC<{ component: React.ReactElement }> = ({
+  component,
+}) => {
+  const { isAuthenticated } = useAuth();
 
+  return isAuthenticated ? component : <Navigate to="/login" replace />;
+};
 export const Layout: FC = () => {
   useHandlePayment();
 
@@ -37,21 +47,47 @@ export const Layout: FC = () => {
       <ScrollRestoration />
       <Box className="flex-1 flex flex-col overflow-hidden">
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-
-          <Route path="/user-package" element={<UserPackage />}></Route>
-
-          <Route path="/qr_code" element={<QrCode />}></Route>
-          <Route path="/qrcodescanner" element={<QRScan />}></Route>
-          <Route path="/user" element={<UserPage />}></Route>
-          <Route path="/form" element={<Form />}></Route>
-          <Route path="/payment" element={<PaymentPage />}></Route>
-          <Route path="/payment-detail" element={<PaymentPageDetail />}></Route>
-          <Route path="/pay-package" element={<Paypackage />}></Route>
+          <Route
+            path="/"
+            element={<ProtectedComponent component={<Home />} />}
+          />
+          <Route
+            path="/user-package"
+            element={<ProtectedComponent component={<UserPackage />} />}
+          />
+          <Route
+            path="/qr_code"
+            element={<ProtectedComponent component={<QrCode />} />}
+          />
+          <Route
+            path="/qrcodescanner"
+            element={<ProtectedComponent component={<QRScan />} />}
+          />
+          <Route
+            path="/user"
+            element={<ProtectedComponent component={<UserPage />} />}
+          />
+          <Route
+            path="/form"
+            element={<ProtectedComponent component={<Form />} />}
+          />
+          <Route
+            path="/payment"
+            element={<ProtectedComponent component={<PaymentPage />} />}
+          />
+          <Route
+            path="/payment-detail"
+            element={<ProtectedComponent component={<PaymentPageDetail />} />}
+          />
+          <Route
+            path="/pay-package"
+            element={<ProtectedComponent component={<Paypackage />} />}
+          />
           <Route
             path="/promotion-package"
-            element={<PromotionPackage />}
-          ></Route>
+            element={<ProtectedComponent component={<PromotionPackage />} />}
+          />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Box>
       <Navigation />

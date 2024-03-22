@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const DisplayQr = () => {
-  const [qrValue, setQrValue] = useState(
-    "ST_2216054E-65AB-4D22-B04F-522849296E0D"
-  );
+  const userKey = localStorage.getItem("user");
+
+  console.log("userKey", userKey);
+
+  const [qrValue, setQrValue] = useState(userKey || "");
   const [countdown, setCountdown] = useState(60);
 
   useEffect(() => {

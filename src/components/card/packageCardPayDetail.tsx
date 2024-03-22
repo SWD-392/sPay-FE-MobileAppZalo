@@ -24,7 +24,7 @@ const PackageCardPayDetail: React.FC<PackageCardPayDetailProps> = ({
           </div>
           <div className="flex justify-between mt-4">
             <p className="w-32">Tổng tiền dùng:</p>
-            <p className="text-right">{data.moneyValue}đ</p>
+            <p className="text-right">{data.usaebleAmount}đ</p>
           </div>
           <div className="flex justify-between mt-4">
             <p className="w-32">Khuyến mãi:</p>
@@ -32,17 +32,23 @@ const PackageCardPayDetail: React.FC<PackageCardPayDetailProps> = ({
           </div>
           <div className="flex justify-between mt-4">
             <p className="w-32">Hạn sử dụng:</p>
-            <p className="text-right">{data.dateNumber} ngày</p>
+            <p className="text-right">{data.numberDate} ngày</p>
           </div>
-          <div className="flex justify-between mt-4">
+          {/* <div className="flex justify-between mt-4">
             <p className="w-32">Loại sản phẩm:</p>
             <p className="text-right">{data.cardCategory}</p>
+          </div> */}
+          <div className="flex justify-between mt-4">
+            <p className="w-32">Rút tiền:</p>
+            <p className="text-right">
+              {data.withdrawAllowed ? "Được" : "Không"}
+            </p>
           </div>
         </div>
       </div>
       <div className="flex justify-center mt-5">
         <Button className="bg-blue-500 text-white p-2 rounded-lg ">
-          Thanh toán
+          Liên hệ: 0978214001
         </Button>
       </div>
     </div>
