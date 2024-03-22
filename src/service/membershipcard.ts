@@ -7,11 +7,17 @@ const BASE_URL = "https://spay-app.azurewebsites.net";
 
 // const BASE_URL = "https://45e2-2402-800-6318-bcb-405c-ed61-8468-6a73.ngrok-free.app"
 const QUERY_MEMBERSHIP = '/api/v1/Memberships';
+const token = localStorage.getItem('token');
 
 export const getMembershipByUserKey = async (userKey: string, storeCate: string) => {
   try {
     const response = await axios.get(
-        `${BASE_URL}${QUERY_MEMBERSHIP}?UserKey=${userKey}&StoreCateKey=${storeCate}`
+        `${BASE_URL}${QUERY_MEMBERSHIP}?UserKey=${userKey}&StoreCateKey=${storeCate}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add the token to the headers
+          },
+        }
         );
     return response.data;
   } catch (error) {
